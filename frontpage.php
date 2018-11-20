@@ -1,20 +1,21 @@
 <?php 
-require "../../config.php";
+require "../../../config.php";
 $database ="if17_lahtsten";
 if(isset($_POST["loginButton"])){
 	$loginEmail = $_POST["loginEmail"];
 	$loginPassword = $_POST["loginPassword"];
 	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-		//valmistame ette käsu andmebaasiserverile
 		$hash = hash("sha512", $loginPassword);
 		$stmt = "SELECT * FROM trailerusers WHERE Email = '$loginEmail' AND Hashpasswd = '$hash'";
 		$result = $mysqli->query($stmt);
 		while ($row = $result->fetch_assoc()) {
-			//echo $row['FirstName']."<br>";
+			echo $row['Email']."<br>";
 			$name = $row['FirstName'];
+			$email = $row['Email'];
 		}
 		session_start();
 		$_SESSION['username']= $name;
+		$_SESSION['email'] = $email;
 		
 		if($result->num_rows > 0){
 			header("Location: avaleht.php");

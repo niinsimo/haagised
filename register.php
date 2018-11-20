@@ -1,5 +1,5 @@
 <?php
-require "../../config.php";
+require "../../../config.php";
 $database ="if17_lahtsten";
 $hash = "";
 $notice = "";
@@ -44,13 +44,13 @@ if(isset($_POST["registerButton"])){
 		$adressError = "Aadress on kohustuslik!";
 	}
 	
-	if(empty($notice) and empty ($firstnameError) and empty ($lastnameError) and empty($emailError) and empty($passwdError) and empty ($passwdagainError)){
+	if(empty($notice) and empty ($firstnameError) and empty ($lastnameError) and empty($emailError) and empty($passwdError) and empty ($passwdagainError) and empty ($adressError)){
 		$hash=hash("sha512", $passwd);
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 		//valmistame ette käsu andmebaasiserverile
-		$stmt = $mysqli->prepare("INSERT INTO trailerusers (FirstName, LastName, Email, Hashpasswd) VALUES (?, ?, ?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO trailerusers (FirstName, LastName, Email, Hashpasswd, Adress) VALUES (?, ?, ?, ?, ?)");
 		echo $mysqli->error;
-		$stmt->bind_param("ssss", $signupFirstName, $signupFamilyName, $signupEmail, $hash);
+		$stmt->bind_param("sssss", $signupFirstName, $signupFamilyName, $signupEmail, $hash, $signUpAdress);
 		if ($stmt->execute()){
 			echo "\n Õnnestus!";
 			header("Location: frontpage.php");

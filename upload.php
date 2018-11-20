@@ -5,41 +5,42 @@
 	<meta charset="utf-8">
 </head>
 <body>
-<form action="upload.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-</form>
+<style>
+.header{
+	display: block;
+	text-align:center;
+	background:yellow;
+}
+</style>
+<div class = "header">
+	<h1>Siin näed saadavalolevaid haagiseid, <?php session_start(); echo $_SESSION['username'];?>
+	
+</div>
 </body>
 </html>
 
 <?php
-$target_dir = "profilepics/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-if(isset($_POST["submit"])){
-	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
+require "../../../config.php";
+$database = "if17_lahtsten";
+$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+$query = "SELECT trailername, trailerdesc FROM trailerinfo";
+$result = $mysqli->query($query);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo "Haagise nimi: ". $row["trailername"]. "<br> Haagise kirjeldus: ". $row["trailerdesc"]. "<br>";
     }
 }
-if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-		$files = scandir ($target_dir);
-		$firstFile = $target_dir . $files[2];
-		echo "<img src ='profilepics'>" . $firstFile;
-    } else {
-        echo "Sorry, there was an error uploading your file.";
-    }
-	
-$files = scandir ($target_dir);
-$firstFile = $target_dir . $files[2];
-echo "<img src ='profilepics/'>". $firstFile . "' alt='error'>"; 
-	
+$target_dir = "profilepics/";
+$test = scandir($target_dir);
+$array = array_diff($test, [".", ".."]);
+$loendur = 1;
+foreach($array as $image){
+	$files = $target_dir . $test[1+ $loendur];
+	$loendur = $loendur +1;
+	echo "<br><img src ='$files'><br>";
+
+}
+
+//http://greeny.cs.tlu.ee/~lahtsten/haagised_too/haagised/profilepics/rtukunn.png
 ?>
 
