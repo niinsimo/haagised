@@ -30,6 +30,7 @@ if(isset($_POST["submit"])){
 	echo $mysqli->error;
 	$query->bind_param("ssss", $trailerName, $target_file, $trailerDesc, $_SESSION['email']);
 	if($query->execute()){
+		header('Location: upload.php');
 	}else{
 		echo "Tekkis viga!" . $query->error;
 	}
@@ -57,7 +58,7 @@ if(isset($_POST["submit"])){
 <a href= "upload.php">
 <input name= "addtrailer" type = "button" value ="Vaata haagiseid" href ="upload.php"></input>
 </a>
-<form action = "upload.php" method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
 	<input type = "text" placeholder = "Haagise nimi" name = "trailerName">
 	<br>
 	<textarea name= "comment" rows = "5" cols = "40" placeholder = "Tehnilised spetsifikatsioonid" ></textarea>
