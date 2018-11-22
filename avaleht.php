@@ -3,6 +3,10 @@ $target_dir = "profilepics/";
 $uploadOk = 1;
 $nameError = "";
 $commentError = "";
+session_start();
+if(!isset($_SESSION['username'])){
+	header('Location: frontpage.php');
+}
 require "../../../config.php";
 if(isset($_POST["submit"])){
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -21,7 +25,6 @@ if(isset($_POST["submit"])){
 		} else {
 			echo "Sorts, midagi läks valesti";
 		}
-	session_start();
 	$database = "if17_lahtsten";
 	$trailerName = $_POST['trailerName'];
 	$trailerDesc = $_POST['comment'];
@@ -34,6 +37,10 @@ if(isset($_POST["submit"])){
 	}else{
 		echo "Tekkis viga!" . $query->error;
 	}
+}
+if(isset($_POST["logout"])){
+	session_unset();
+	header("Location: frontpage.php");
 }
 
 
@@ -52,12 +59,11 @@ if(isset($_POST["submit"])){
 </head>
 <body>
 <div class = "header">
-	<h1>Tere tulemast haagisterendilehele <?php session_start(); echo $_SESSION['username'];?>
+	<h1>Tere tulemast haagisterendilehele, <?php echo $_SESSION['username'];?></h1>
+	<a href = "upload.php">Vaata haagiseid</a>
 	
 </div>
-<a href= "upload.php">
-<input name= "addtrailer" type = "button" value ="Vaata haagiseid" href ="upload.php"></input>
-</a>
+<h2>Lisa enda haagis</h2>
 <form method="post" enctype="multipart/form-data">
 	<input type = "text" placeholder = "Haagise nimi" name = "trailerName">
 	<br>
@@ -68,3 +74,6 @@ if(isset($_POST["submit"])){
     <input type="submit" value="Lae haagis üles" name="submit">
 </form>
 <a href = "mydata.php">Minu andmed</a>
+<form method="post" enctype="multipart/form-data">
+	<input name = "logout" type = "submit" value = "Logi välja">
+</form>

@@ -22,6 +22,9 @@
 
 <?php
 require "../../../config.php";
+if(!isset($_SESSION['username'])){
+	header('Location: frontpage.php');
+}
 $database = "if17_lahtsten";
 $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 $query = "SELECT trailername, trailerdesc FROM trailerinfo";

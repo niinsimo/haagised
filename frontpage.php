@@ -41,7 +41,7 @@ if(isset($_POST["loginButton"])){
 }
 </style>
 	
-	<title>Sisselogimine või uue kasutaja loomine</title>
+	<title>Haagiserent - elu nagu kiirteel!</title>
 	<header>
 	
 	
