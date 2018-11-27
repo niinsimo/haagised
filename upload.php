@@ -27,22 +27,16 @@ if(!isset($_SESSION['username'])){
 }
 $database = "if17_lahtsten";
 $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-$query = "SELECT trailername, trailerdesc FROM trailerinfo";
+$query = "SELECT trailername, trailerdesc, trailerpic FROM trailerinfo";
 $result = $mysqli->query($query);
-
-$target_dir = "profilepics/";
-$test = scandir($target_dir);
-$array = array_diff($test, [".", ".."]);
-$loendur = 1;
-foreach($array as $image){
-	$files = $target_dir . $test[1+ $loendur];
-	$loendur = $loendur +1;
-	echo "<br><img src ='$files'><br>";
-	if ($result->num_rows > 0) {
+$result_rows = $result->num_rows;
+for($x = 0; $x<$result_rows; $x++){
+	if ($result_rows > 0) {
 		$row = $result->fetch_assoc();
-        echo "Haagise nimi: ". $row["trailername"]. "<br> Haagise kirjeldus: ". $row["trailerdesc"]. "<br>";
-}
-
+		echo "<br><img src =". $row['trailerpic']. "><br>";
+		echo "Haagise nimi: ". $row["trailername"]. "<br> Haagise kirjeldus: ". $row["trailerdesc"]. "<br>";
+		echo "<a href = './broneering.php'>Broneeri haagis</a>";
+	}
 }
 
 //http://greeny.cs.tlu.ee/~lahtsten/haagised_too/haagised/profilepics/rtukunn.png
