@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 require './PHPMailer/src/Exception.php';
 require './PHPMailer/src/PHPMailer.php';
 require './PHPMailer/src/SMTP.php';
+session_start();
 
 if(isset($_POST['smbbtn'])){
 	$start = $_POST['start'];
@@ -23,7 +24,7 @@ if(isset($_POST['smbbtn'])){
 		$mail->Password = 'test1234!';
 		$mail->SetFrom('no-reply@trailer.com');
 		$mail->Subject = 'Haagis on broneeritud!';
-		$mail->Body = 'Tere hea haagisrendi veebikülje kasutaja!. Te olete meie veebileheküljelt rentinud haagise ajavahemikus  '. $start . " kuni " . $end;
+		$mail->Body = 'Tere hea haagisrendi veebikülje kasutaja!. Te olete meie veebileheküljelt rentinud haagise ' . $_SESSION['trailername'] . ' ajavahemikus  '. $start . " kuni " . $end;
 		$mail->AddAddress($_SESSION['email']);
 		$mail->Send();
 		echo 'Message has been sent';
@@ -52,11 +53,11 @@ if(isset($_POST['smbbtn'])){
 </head>
 <body>
 <div class = "header">
-	<h1>Broneeri endale haagis, <?php session_start(); echo $_SESSION['username'];?></h1>
+	<h1>Broneeri endale haagis, <?php echo $_SESSION['username'];?></h1>
 	<a href = "upload.php">Vaata haagiseid</a>
 	
 </div>
-<h2>Millisel ajavahemikul soovid haagist broneerida, <?php echo $_SESSION['username'];?> ?</h2>
+<h2>Millisel ajavahemikul soovid haagist <?php echo $_SESSION['trailername'];?> broneerida, <?php echo $_SESSION['username'];?> ?</h2>
 <form method = "post">
 	Algusaeg:<input type = "date" name = "start">
 	Lõppaeg:<input type = "date" name = "end">

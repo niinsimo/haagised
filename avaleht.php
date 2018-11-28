@@ -42,6 +42,13 @@ if(isset($_POST["logout"])){
 	session_unset();
 	header("Location: frontpage.php");
 }
+$targetdir2 = "profpics/";
+
+//if(isset($_POST['submitbtn'])){
+	
+//}
+	
+	
 
 
 ?>
@@ -74,6 +81,10 @@ if(isset($_POST["logout"])){
     <input type="submit" value="Lae haagis üles" name="submit">
 </form>
 <a href = "mydata.php">Minu andmed</a>
+<form method = "post">
+    <input type="file" name="profilepic" id="fileToUpload">
+    <input type="submit" value="Lae haagis üles" name="submitbtn">
+</form>
 <form method="post" enctype="multipart/form-data">
 	<input name = "logout" type = "submit" value = "Logi välja">
 </form>
