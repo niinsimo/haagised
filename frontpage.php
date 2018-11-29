@@ -12,10 +12,12 @@ if(isset($_POST["loginButton"])){
 			echo $row['Email']."<br>";
 			$name = $row['FirstName'];
 			$email = $row['Email'];
+			$id = $row['id'];
 		}
 		session_start();
 		$_SESSION['username']= $name;
 		$_SESSION['email'] = $email;
+		$_SESSION['id'] = $id;
 		
 		if($result->num_rows > 0){
 			header("Location: avaleht.php");

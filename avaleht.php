@@ -42,11 +42,7 @@ if(isset($_POST["logout"])){
 	session_unset();
 	header("Location: frontpage.php");
 }
-$targetdir2 = "profpics/";
 
-//if(isset($_POST['submitbtn'])){
-	
-//}
 	
 	
 
@@ -62,11 +58,65 @@ $targetdir2 = "profpics/";
 	text-align:center;
 	background:yellow;
 }
+img {
+	border-radius: 100%;
+}
 </style>
 </head>
 <body>
 <div class = "header">
 	<h1>Tere tulemast haagisterendilehele, <?php echo $_SESSION['username'];?></h1>
+	<?php
+	$folder = str_replace(' ', '_', $_SESSION['username']) . "_" . $_SESSION['id'] . "/";
+	if(file_exists("$folder")){
+		if(isset($_POST['submitbtn'])){
+			$target_file = $folder . basename($_FILES["fileToUpload2"]["name"]);
+			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+			$check = getimagesize($_FILES["fileToUpload2"]["tmp_name"]);
+			if($check !== false) {
+				$uploadOk = 1;
+			} else {
+				echo "File is not an image.";
+				$uploadOk = 0;
+			}
+
+			if (move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file)) {
+				} else {
+					echo "Sorts, midagi läks valesti";
+				}
+			
+		}
+	}
+	if(!file_exists("$folder")){
+		if(isset($_POST['submitbtn'])){
+			mkdir($folder, 0777);
+			$target_file = $folder . basename($_FILES["fileToUpload2"]["name"]);
+			$_SESSION['file'] = $target_file;
+			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+			$check = getimagesize($_FILES["fileToUpload2"]["tmp_name"]);
+			if($check !== false) {
+				$uploadOk = 1;
+			} else {
+				echo "File is not an image.";
+				$uploadOk = 0;
+			}
+
+			if (move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file)) {
+				} else {
+					echo "Sorts, midagi läks valesti";
+				}
+			
+		}
+	}
+	
+		
+	if(file_exists("$folder")){
+		chmod($folder, 0777);
+		echo "<img src =" . $_SESSION['file'] . "><br>";
+	}
+	
+	
+	?>
 	<a href = "upload.php">Vaata haagiseid</a>
 	
 </div>
@@ -76,14 +126,14 @@ $targetdir2 = "profpics/";
 	<br>
 	<textarea name= "comment" rows = "5" cols = "40" placeholder = "Tehnilised spetsifikatsioonid" ></textarea>
 	<br>
-    Vali pilt, mida üles laadida:
+   Vali haagis, mida üles laadida:
     <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="submit" value="Lae haagis üles" name="submit">
 </form>
 <a href = "mydata.php">Minu andmed</a>
-<form method = "post">
-    <input type="file" name="profilepic" id="fileToUpload">
-    <input type="submit" value="Lae haagis üles" name="submitbtn">
+<form method = "post" enctype="multipart/form-data">
+    <input type="file" name="fileToUpload2" id="fileToUpload2">
+    <input type="submit" value="Uuenda profiilipilti" name="submitbtn">
 </form>
 <form method="post" enctype="multipart/form-data">
 	<input name = "logout" type = "submit" value = "Logi välja">
