@@ -49,6 +49,41 @@ if(isset($_POST['smbbtn'])){
 	text-align:center;
 	background:yellow;
 }
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -57,9 +92,61 @@ if(isset($_POST['smbbtn'])){
 	<a href = "upload.php">Vaata haagiseid</a>
 	
 </div>
-<h2>Millisel ajavahemikul soovid haagist <?php echo $_SESSION['trailername'];?> broneerida, <?php echo $_SESSION['username'];?> ?</h2>
+<h2>Millisel ajavahemikul soovid rentida kasutajale <?php echo $_SESSION['fname'] . " " . $_SESSION['lname'];?> kuuluvat haagist <?php echo $_SESSION['trailername'];?> ?</h2>
 <form method = "post">
 	Algusaeg:<input type = "date" name = "start">
 	Lõppaeg:<input type = "date" name = "end">
 	<input type = "submit" name = "smbbtn" value = "Kinnita">
 </form>
+<button id="myBtn">Vaata kasutaja täpsemaid andmeid</button>
+<div id="myModal" class="modal">
+	<div class="modal-content">
+    <span class="close">&times;</span>
+    <p><?php 
+	require "../../../config.php";
+	$database = "if17_lahtsten";
+	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+	$eMail = $_SESSION['meil'];
+	$query = "SELECT FirstName, LastName, Email, Adress FROM trailerusers WHERE Email = '$eMail'";
+	$result = $mysqli->query($query);
+	$row = $result->fetch_assoc();
+	$result_rows = $result->num_rows;
+	if($result_rows > 0){
+		echo "Haagise omanik: " . $row["FirstName"] . " " . $row["LastName"] . "<br> Omaniku e-mail: " . $row["Email"] . "<br> Omaniku aadress: " . $row["Adress"]; 
+	}
+	
+	
+	?>
+	
+	</p>
+  </div>
+
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+</body>

@@ -13,11 +13,13 @@ if(isset($_POST["loginButton"])){
 			$name = $row['FirstName'];
 			$email = $row['Email'];
 			$id = $row['id'];
+			$lastname = $row['LastName'];
 		}
 		session_start();
 		$_SESSION['username']= $name;
 		$_SESSION['email'] = $email;
 		$_SESSION['id'] = $id;
+		$_SESSION['lastname'] = $lastname;
 		
 		if($result->num_rows > 0){
 			header("Location: avaleht.php");

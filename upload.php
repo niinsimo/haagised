@@ -27,8 +27,7 @@ if(!isset($_SESSION['username'])){
 }
 $database = "if17_lahtsten";
 $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-$query = "SELECT trailername, trailerdesc, trailerpic FROM trailerinfo";
-//$query2 = "SELECT "
+$query = " SELECT FirstName, LastName, trailerinfo.trailername, trailerinfo.trailerdesc, trailerinfo.trailerpic, trailerusers.Email FROM trailerusers INNER JOIN trailerinfo ON trailerusers.Email = trailerinfo.Email";
 $result = $mysqli->query($query);
 $result_rows = $result->num_rows;
 for($x = 0; $x<$result_rows; $x++){
@@ -36,12 +35,18 @@ for($x = 0; $x<$result_rows; $x++){
 		$row = $result->fetch_assoc();
 		$trname = $row['trailername'];
 		echo "<br><img src =". $row['trailerpic']. " id = " . str_replace(' ', '_', $row['trailername']) ."><br>";
-		echo "Haagise nimi: ". $row["trailername"]. "<br> Haagise kirjeldus: ". $row["trailerdesc"]. "<br>";
+		echo "Üleslaadija: ". $row["FirstName"] . " " . $row["LastName"] . "<br>  Haagise nimi: ". $row["trailername"]. "<br> Haagise kirjeldus: ". $row["trailerdesc"]. "<br>";
 		echo "<form method='post'><input type = 'submit' value = 'Broneeri' name = " .str_replace(' ', '_', $row['trailername']) . "> </form>";
 		$corstr = str_replace(' ', '_', $row['trailername']);
 		if(isset($_POST["$corstr"])){
+			$fname = $row['FirstName'];
+			$lname = $row['LastName'];
 			$trname = $row['trailername'];
+			$userEmail = $row['Email'];
 			$_SESSION['trailername'] = $trname;
+			$_SESSION['fname'] = $fname;
+			$_SESSION['lname'] = $lname;
+			$_SESSION['meil'] = $row['Email'];
 			header("Location: broneering.php");
 		}
 			
@@ -49,6 +54,5 @@ for($x = 0; $x<$result_rows; $x++){
 	}
 }
 
-//http://greeny.cs.tlu.ee/~lahtsten/haagised_too/haagised/profilepics/rtukunn.png
 ?>
 

@@ -42,7 +42,12 @@ if(isset($_POST["logout"])){
 	session_unset();
 	header("Location: frontpage.php");
 }
-
+$database = "if17_lahtsten";
+$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+$email = $_SESSION['email'];
+$query = "SELECT * FROM trailerinfo WHERE Email =  '$email'";
+$result = $mysqli->query($query);
+$result_rows = $result->num_rows;
 	
 	
 
@@ -61,6 +66,11 @@ if(isset($_POST["logout"])){
 img {
 	border-radius: 100%;
 }
+.test{
+	text-align:left;
+	background: red;
+}
+
 </style>
 </head>
 <body>
@@ -71,6 +81,7 @@ img {
 	if(file_exists("$folder")){
 		if(isset($_POST['submitbtn'])){
 			$target_file = $folder . basename($_FILES["fileToUpload2"]["name"]);
+			$_SESSION['file'] = $target_file;
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 			$check = getimagesize($_FILES["fileToUpload2"]["tmp_name"]);
 			if($check !== false) {
@@ -118,6 +129,9 @@ img {
 	
 	?>
 	<a href = "upload.php">Vaata haagiseid</a>
+	<div class= "test">
+	<h2>Minu Haagised: <?php echo $result_rows;?></h2>
+	</div>
 	
 </div>
 <h2>Lisa enda haagis</h2>
