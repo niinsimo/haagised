@@ -78,8 +78,17 @@ img {
 	<h1>Tere tulemast haagisterendilehele, <?php echo $_SESSION['username'];?></h1>
 	<?php
 	$folder = str_replace(' ', '_', $_SESSION['username']) . "_" . $_SESSION['id'] . "/";
+	
 	if(file_exists("$folder")){
+		$file = scandir($folder);
+		$_SESSION['file'] = $folder . $file[2];
 		if(isset($_POST['submitbtn'])){
+			$files = glob("./" . $folder ."/*");
+			foreach($files as $file){
+				if(is_file($file)){
+					unlink($file);
+				}
+			}
 			$target_file = $folder . basename($_FILES["fileToUpload2"]["name"]);
 			$_SESSION['file'] = $target_file;
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -128,7 +137,8 @@ img {
 	
 	
 	?>
-	<a href = "upload.php">Vaata haagiseid</a>
+	<a href = "upload.php">Vaata saadavalolevaid haagiseid</a>
+	<a href = "mytrailers.php">Vaata enda haagiseid</a>
 	<div class= "test">
 	<h2>Minu Haagised: <?php echo $result_rows;?></h2>
 	</div>

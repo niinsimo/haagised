@@ -32,6 +32,10 @@ if(isset($_POST['smbbtn'])){
 		echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 	}
 }
+if(isset($_POST['submit'])){
+	session_unset();
+	header("Location:frontpage.php");
+}
 
 
 
@@ -90,6 +94,9 @@ if(isset($_POST['smbbtn'])){
 <div class = "header">
 	<h1>Broneeri endale haagis, <?php echo $_SESSION['username'];?></h1>
 	<a href = "upload.php">Vaata haagiseid</a>
+	<form method = "post" enctype = "multipart/form-data">
+		<input type = "submit" name = "submit" value = "Logi välja">
+	</form>
 	
 </div>
 <h2>Millisel ajavahemikul soovid rentida kasutajale <?php echo $_SESSION['fname'] . " " . $_SESSION['lname'];?> kuuluvat haagist <?php echo $_SESSION['trailername'];?> ?</h2>

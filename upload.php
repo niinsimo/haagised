@@ -15,6 +15,9 @@
 <div class = "header">
 	<h1>Siin näed saadavalolevaid haagiseid, <?php session_start(); echo $_SESSION['username'];?></h1>
 	<a href = "avaleht.php">Tagasi avalehele</a>
+	<form method = "post" enctype = "multipart/form-data">
+		<input type = "submit" name = "submit" value = "Logi Välja">
+	</form>
 	
 </div>
 </body>
@@ -27,7 +30,8 @@ if(!isset($_SESSION['username'])){
 }
 $database = "if17_lahtsten";
 $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-$query = " SELECT FirstName, LastName, trailerinfo.trailername, trailerinfo.trailerdesc, trailerinfo.trailerpic, trailerusers.Email FROM trailerusers INNER JOIN trailerinfo ON trailerusers.Email = trailerinfo.Email";
+$sessEmail = $_SESSION['email'];
+$query = " SELECT FirstName, LastName, trailerinfo.trailername, trailerinfo.trailerdesc, trailerinfo.trailerpic, trailerusers.Email FROM trailerusers INNER JOIN trailerinfo ON trailerusers.Email = trailerinfo.Email WHERE trailerinfo.Email <> '$sessEmail'";
 $result = $mysqli->query($query);
 $result_rows = $result->num_rows;
 for($x = 0; $x<$result_rows; $x++){
@@ -51,7 +55,12 @@ for($x = 0; $x<$result_rows; $x++){
 		}
 			
 			
+			
 	}
+}
+if(isset($_POST['submit'])){
+	session_unset();
+	header("Location:frontpage.php");
 }
 
 ?>
