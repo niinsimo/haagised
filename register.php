@@ -1,5 +1,5 @@
 <?php
-require "../../../config.php";
+require "../../config.php";
 $database ="if17_lahtsten";
 $hash = "";
 $notice = "";
@@ -74,9 +74,13 @@ if(isset($_POST["registerButton"])){
 <html lang="et">
 <head>
 <meta charset="utf-8">
+<style>
+<?php include 'css/main.css'; ?>
+</style>
 <form method="POST">
 </head>
 <body>
+
 		<label>Eesnimi </label>
 		<input name="signupFirstName" type="text"><?php echo $firstnameError; ?> 
 		<span></span>

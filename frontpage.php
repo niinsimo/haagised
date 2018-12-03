@@ -1,5 +1,5 @@
 <?php 
-require "../../../config.php";
+require "../../config.php";
 $database ="if17_lahtsten";
 if(isset($_POST["loginButton"])){
 	$loginEmail = $_POST["loginEmail"];
@@ -35,14 +35,8 @@ if(isset($_POST["loginButton"])){
 <head>
 <meta charset="utf-8">
 <style>
-.header{
-	display: block;
-	text-align:center;
-	background:yellow;
-}
-.mainpage{
-	text-align:center;
-}
+<style>
+<?php include 'css/main.css'; ?>
 </style>
 	
 	<title>Haagiserent - elu nagu kiirteel!</title>

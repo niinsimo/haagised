@@ -2,15 +2,12 @@
 <head>
 <meta charset="utf-8">
 <style>
-.header{
-	display: block;
-	text-align:center;
-	background:yellow;
-}
-
+<?php include 'css/main.css'; ?>
 </style>
 </head>
 <body>
+<?php include("header.php"); ?>
+
 <div class = "header">
 	<h1>Siin näed enda üleslaetud haagiseid, <?php session_start(); echo $_SESSION['username'];?>.</h1>
 	<a href = "avaleht.php">Tagasi avalehele</a>
@@ -19,7 +16,7 @@
 	</form>
 </div>
 <?php
-require "../../../config.php";
+require "../../config.php";
 $database = "if17_lahtsten";
 $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 $email = $_SESSION['email'];

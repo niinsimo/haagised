@@ -7,7 +7,7 @@ session_start();
 if(!isset($_SESSION['username'])){
 	header('Location: frontpage.php');
 }
-require "../../../config.php";
+require "../../config.php";
 if(isset($_POST["submit"])){
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -58,24 +58,13 @@ $result_rows = $result->num_rows;
 <head>
 <meta charset="utf-8">
 <style>
-.header{
-	display: block;
-	text-align:center;
-	background:yellow;
-}
-img {
-	border-radius: 100%;
-}
-.test{
-	text-align:left;
-	background: red;
-}
-
+<?php include 'css/main.css'; ?>
 </style>
 </head>
 <body>
+<?php include("header.php"); ?>
+
 <div class = "header">
-	<h1>Tere tulemast haagisterendilehele, <?php echo $_SESSION['username'];?></h1>
 	<?php
 	$folder = str_replace(' ', '_', $_SESSION['username']) . "_" . $_SESSION['id'] . "/";
 	
@@ -132,33 +121,42 @@ img {
 		
 	if(file_exists("$folder")){
 		chmod($folder, 0777);
-		echo "<img src =" . $_SESSION['file'] . "><br>";
+		echo "<img class='profile-pic resize' src =" . $_SESSION['file'] . "><br>";
 	}
 	
 	
 	?>
-	<a href = "upload.php">Vaata saadavalolevaid haagiseid</a>
-	<a href = "mytrailers.php">Vaata enda haagiseid</a>
-	<div class= "test">
-	<h2>Minu Haagised: <?php echo $result_rows;?></h2>
+	<h1 class="username"><?php echo $_SESSION['username'];?></h1>
+	<div class= "container">
+		<ul>
+			<li><p>Minu Haagised: </p><a><?php echo $result_rows;?></a></li>
+			<li><p>Minu keskmine hinne: </p><a><?php echo $result_rows;?></a></li>
+			<li><p>Renditud haagiseid: </p><a><?php echo $result_rows;?></a></li>
+		</ul>
 	</div>
-	
 </div>
-<h2>Lisa enda haagis</h2>
-<form method="post" enctype="multipart/form-data">
-	<input type = "text" placeholder = "Haagise nimi" name = "trailerName">
-	<br>
-	<textarea name= "comment" rows = "5" cols = "40" placeholder = "Tehnilised spetsifikatsioonid" ></textarea>
-	<br>
-   Vali haagis, mida üles laadida:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Lae haagis üles" name="submit">
-</form>
-<a href = "mydata.php">Minu andmed</a>
-<form method = "post" enctype="multipart/form-data">
-    <input type="file" name="fileToUpload2" id="fileToUpload2">
-    <input type="submit" value="Uuenda profiilipilti" name="submitbtn">
-</form>
-<form method="post" enctype="multipart/form-data">
-	<input name = "logout" type = "submit" value = "Logi välja">
-</form>
+<div class="addTrailerContainer">
+	<div class="addTrailer">
+		<h2>Lisa enda haagis</h2>
+		<form method="post" enctype="multipart/form-data">
+			<input type = "text" placeholder = "Haagise nimi" name = "trailerName">
+			<br>
+			<textarea name= "comment" rows = "5" cols = "40" placeholder = "Tehnilised spetsifikatsioonid" ></textarea>
+			<br>
+		   Vali haagis, mida üles laadida:
+			<input type="file" name="fileToUpload" id="fileToUpload">
+			<input type="submit" value="Lae haagis üles" name="submit">
+		</form>
+	</div>
+	<div class="addTrailer">
+		<a href = "mydata.php">Minu andmed</a>
+		<form method = "post" enctype="multipart/form-data">
+			<input type="file" name="fileToUpload2" id="fileToUpload2">
+			<input type="submit" value="Uuenda profiilipilti" name="submitbtn">
+		</form>
+		<form method="post" enctype="multipart/form-data">
+			<input name = "logout" type = "submit" value = "Logi välja">
+		</form>
+	</div>
+</div>
+

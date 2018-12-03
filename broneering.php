@@ -48,49 +48,12 @@ if(isset($_POST['submit'])){
 <head>
 <meta charset="utf-8">
 <style>
-.header{
-	display: block;
-	text-align:center;
-	background:yellow;
-}
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
+<?php include 'css/main.css'; ?>
 </style>
 </head>
 <body>
+<?php include("header.php"); ?>
+
 <div class = "header">
 	<h1>Broneeri endale haagis, <?php echo $_SESSION['username'];?></h1>
 	<a href = "upload.php">Vaata haagiseid</a>
@@ -110,7 +73,7 @@ if(isset($_POST['submit'])){
 	<div class="modal-content">
     <span class="close">&times;</span>
     <p><?php 
-	require "../../../config.php";
+	require "../../config.php";
 	$database = "if17_lahtsten";
 	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 	$eMail = $_SESSION['meil'];

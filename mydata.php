@@ -1,5 +1,5 @@
 <?php
-require "../../../config.php";
+require "../../config.php";
 $database = "if17_lahtsten";
 session_start();
 $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
