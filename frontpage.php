@@ -37,37 +37,22 @@ if(isset($_POST["loginButton"])){
 <style>
 <style>
 <?php include 'css/main.css'; ?>
-</style>
-	
-	<title>Haagiserent - elu nagu kiirteel!</title>
-	<header>
-	
-	
-	
+</style>	
+	<title>H-rent - elu nagu kiirteel!</title>	
 </head>
+
 <body>
-<div class= "header">
-	<h1>Tel nr: 5387250</h1>
-	<h2>Email: haagiserent@haagis.ee</h1>
-</div>
-<div class = "mainpage">
-	<h1>Olete jõudnud haagiserendi lehele</h1>
-	<h1> Vaata saadaval olevaid <a href= "haagised.php">haagiseid</a> <h1> või <a href= "register.php">loo kasutaja</a></h1>
-	<h2>Logi sisse!</h2>
-	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-		<label>Kasutajanimi (E-post): </label>
-		<input name="loginEmail" placeholder= "Email" type="email">
-		<br><br>
-		<label>Parool:</label>
-		<input name="loginPassword" placeholder="Salasõna" type="password"><span></span>
-		<br><br>
-		<input name="loginButton" type="submit" value="Logi sisse">
+<div class= "frontPageContainer">
+	<img class="mainlogo" src="css/pics/haagiserent-suur.png">
+	
+	<form class="login" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+		<input type="text" name="loginEmail" placeholder= "Email" type="email"><br>
+		<input name="loginPassword" placeholder="Salasõna" type="password"><span></span><br>
+		<input class="submitButton" name="loginButton" type="submit" value="Logi sisse">
 	</form>
-	</div>
 	
-	
-	
-	
+	<img src="css/pics/haagiseskeem.png">
+</div>
 		
 </body>
 </html>

@@ -9,14 +9,6 @@
 <?php include 'css/main.css'; ?>
 </style>
 <?php include("header.php"); ?>
-<div class = "header">
-	<h1>Siin näed saadavalolevaid haagiseid, <?php session_start(); echo $_SESSION['username'];?></h1>
-	<a href = "avaleht.php">Tagasi avalehele</a>
-	<form method = "post" enctype = "multipart/form-data">
-		<input type = "submit" name = "submit" value = "Logi Välja">
-	</form>
-	
-</div>
 </body>
 </html>
 
