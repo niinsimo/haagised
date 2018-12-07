@@ -2,19 +2,16 @@
 <head>
 <meta charset="utf-8">
 <style>
-<?php include 'css/main.css'; ?>
+<?php ob_start(); include 'css/main.css'; ?>
 </style>
 </head>
 <body>
-<?php include("header.php"); ?>
+<?php session_start(); include("header.php"); ?>
 
 <div class = "header">
-	<h1>Siin näed enda üleslaetud haagiseid, <?php session_start(); echo $_SESSION['username'];?>.</h1>
-	<a href = "avaleht.php">Tagasi avalehele</a>
-	<form method = "post" enctype "multipart/form-data">
-		<input type = "submit" name = "submit" value = "Logi välja">
-	</form>
-</div>
+	<h1 class = "h1">Siin näed enda üleslaetud haagiseid, <?php echo $_SESSION['username'];?>.</h1>
+	
+
 <?php
 require "../../config.php";
 $database = "if17_lahtsten";
@@ -30,7 +27,7 @@ for($x = 0; $x<$result_rows; $x++){
 		$row = $result->fetch_assoc();
 		$_SESSION['trname'] = $row['trailername'];
 		echo "<img src= " . $row['trailerpic'] . "><br>";
-		echo "Haagise nimi: " . $row['trailername'] . "<br> Haagise kirjeldus: " . $row['trailerdesc'] . "<br><form method = 'post' enctype ='multipart/form-data' ><input type = 'text' name = 'chname" .$loendur ."' placeholder = 'Muuda nime'><input type= 'submit' name ='submitname" . $loendur ."' value = 'Muuda'></form><br><form method = 'post' enctype = 'multipart/form-data'><textarea name= 'chdesc" . $loendur ."' placeholder = 'Muuda kirjeldust' rows = '5' cols = '40'>" . $row['trailerdesc'] . "</textarea><input type = 'submit' name = 'submitdesc" . $loendur ."' value = 'Muuda'></form>";
+		echo "<div class='addTrailerContainer'><div class = 'addTrailer'>Haagise nimi: " . $row['trailername'] . "<br><br><form method = 'post' enctype ='multipart/form-data' ><input type = 'text' name = 'chname" .$loendur ."' placeholder = 'Muuda nime'><div class = 'upload-btn-wrapper'><input type= 'submit' name ='submitname" . $loendur ."' value = 'Muuda'></div></form><br>Haagise kirjeldus: " . $row['trailerdesc'] . "<br><br><form method = 'post' enctype = 'multipart/form-data'><textarea name= 'chdesc" . $loendur ."' placeholder = 'Muuda kirjeldust' rows = '5' cols = '40'>" . $row['trailerdesc'] . "</textarea><div class = 'upload-btn-wrapper'><input type = 'submit' name = 'submitdesc" . $loendur ."' value = 'Muuda'></form></div></div></div>";
 		$email = $_SESSION['email'];
 		$newsbmname = "submitname" . $loendur;
 		$newsbmdesc = "submitdesc" .$loendur;
@@ -68,4 +65,8 @@ if(isset($_POST['submit'])){
 
 
 ?>
+<?php
+include("footer.php");
+?>
+</div>
 

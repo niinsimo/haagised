@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +5,9 @@
 </head>
 <body>
 <style>
-<?php include 'css/main.css'; ?>
+<?php ob_start(); include 'css/main.css'; ?>
 </style>
-<?php include("header.php"); ?>
+<?php session_start(); include("header.php"); ?>
 </body>
 </html>
 
@@ -17,6 +16,7 @@ require "../../config.php";
 if(!isset($_SESSION['username'])){
 	header('Location: frontpage.php');
 }
+
 $database = "if17_lahtsten";
 $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 $sessEmail = $_SESSION['email'];
@@ -27,9 +27,9 @@ for($x = 0; $x<$result_rows; $x++){
 	if ($result_rows > 0) {
 		$row = $result->fetch_assoc();
 		$trname = $row['trailername'];
-		echo "<br><img src =". $row['trailerpic']. " id = " . str_replace(' ', '_', $row['trailername']) ."><br>";
-		echo "Üleslaadija: ". $row["FirstName"] . " " . $row["LastName"] . "<br>  Haagise nimi: ". $row["trailername"]. "<br> Haagise kirjeldus: ". $row["trailerdesc"]. "<br>";
-		echo "<form method='post'><input type = 'submit' value = 'Broneeri' name = " .str_replace(' ', '_', $row['trailername']) . "> </form>";
+		echo "<div class = 'trailersContainer'><div class = 'addTrailer'><br><br><img src =". $row['trailerpic']. " width = '300' height = '200' id = " . str_replace(' ', '_', $row['trailername']) ."><br>";
+		echo "Üleslaadija: ". $row["FirstName"] . " " . $row["LastName"] . "<br>  Haagise nimi: ". $row["trailername"]. "<br> Haagise kirjeldus: ". $row["trailerdesc"]. "";
+		echo "<form method='post'><div class = 'upload-btn-wrapper'><input type = 'submit' value = 'Broneeri' name = " .str_replace(' ', '_', $row['trailername']) . "> </form></div></div></div>";
 		$corstr = str_replace(' ', '_', $row['trailername']);
 		if(isset($_POST["$corstr"])){
 			$fname = $row['FirstName'];
@@ -51,6 +51,6 @@ if(isset($_POST['submit'])){
 	session_unset();
 	header("Location:frontpage.php");
 }
-
+include 'footer.php';
 ?>
 

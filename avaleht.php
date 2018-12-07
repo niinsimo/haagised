@@ -48,6 +48,19 @@ $email = $_SESSION['email'];
 $query = "SELECT * FROM trailerinfo WHERE Email =  '$email'";
 $result = $mysqli->query($query);
 $result_rows = $result->num_rows;
+
+$query2 = "SELECT  AVG(rating) FROM trailerrating WHERE email = '$email'";
+$result2 = $mysqli->query($query2);
+$row = $result2->fetch_assoc();
+$result_rows2 = $result2->num_rows;
+$vastus = $row['AVG(rating)'];
+if (is_null($vastus)) {
+	
+	$vastus = " Teile pole veel hinnangut antud!";
+}else{
+	
+	$vastus = $row['AVG(rating)'];
+}
 	
 	
 
@@ -133,7 +146,7 @@ $result_rows = $result->num_rows;
 			<div class= "container">
 				<ul>
 					<li><p>Minu Haagised: </p><a><?php echo $result_rows;?></a></li>
-					<li><p>Minu keskmine hinne: </p><a><?php echo $result_rows;?></a></li>
+					<li><p>Minu keskmine hinne: </p><a><?php echo $vastus;?></a></li>
 					<li><p>Renditud haagiseid: </p><a><?php echo $result_rows;?></a></li>
 				</ul>
 			</div>

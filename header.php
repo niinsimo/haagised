@@ -1,4 +1,6 @@
-
+<?php
+ob_start();
+?>
 <header>
 <section>
 <img src="css/pics/haagiserent-pisi.png" id="logo">
