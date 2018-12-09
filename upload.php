@@ -20,9 +20,9 @@
 			$result = $mysqli->query($query);
 			if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
-					echo "Eesnimi: ". $row["FirstName"] . "</br>"; 
-					echo "Perenimi: ". $row["LastName"]. "</br>";
-					echo "Aadress: " . $row["Adress"] . "<form method = 'post'><input name = 'changeAdress' type='text' placeholder = 'Muuda aadressi'><input name = 'changeButton' type='submit' value = 'Muuda'></form> <br>";
+					echo "<h3>Eesnimi: ". $row["FirstName"] . "</h3></br>"; 
+					echo "<h3>Perenimi: ". $row["LastName"]. "</h3></br>";
+					echo "<h3>Aadress: " . $row["Adress"] . "</h3><form method = 'post'><input name = 'changeAdress' type='text' placeholder = 'Muuda aadressi'><input name = 'changeButton' type='submit' value = 'Muuda'></form> <br>";
 				}
 			} else {
 				echo "Midagi läks valesti!";

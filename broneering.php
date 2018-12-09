@@ -57,44 +57,37 @@ if(isset($_POST['submit'])){
 <body>
 <?php include("header.php"); ?>
 
-<div class = "header">
-	<h1>Broneeri endale haagis, <?php echo $_SESSION['username'];?></h1>
-	<a href = "upload.php">Vaata haagiseid</a>
-	<form method = "post" enctype = "multipart/form-data">
-		<input type = "submit" name = "submit" value = "Logi välja">
-	</form>
-	
+<div class = 'trailersContainer'>
+	<div class = 'addTrailer'>
+		<h2>Millisel ajavahemikul soovid rentida kasutajale <?php echo $_SESSION['fname'] . " " . $_SESSION['lname'];?> kuuluvat haagist <?php echo $_SESSION['trailername'];?> ?</h2>
+		<form method = "post">
+			Algusaeg:<input type = "date" name = "start">
+			Lõppaeg:<input type = "date" name = "end">
+			<input type = "submit" name = "smbbtn" value = "Kinnita">
+		</form>
+		<button id="myBtn">Vaata kasutaja täpsemaid andmeid</button>
+		<div id="myModal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<p>
+				<?php 
+				require "../../config.php";
+				$database = "if17_lahtsten";
+				$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+				$eMail = $_SESSION['meil'];
+				$query = "SELECT FirstName, LastName, Email, Adress FROM trailerusers WHERE Email = '$eMail'";
+				$result = $mysqli->query($query);
+				$row = $result->fetch_assoc();
+				$result_rows = $result->num_rows;
+				if($result_rows > 0){
+					echo "Haagise omanik: " . $row["FirstName"] . " " . $row["LastName"] . "<br> Omaniku e-mail: " . $row["Email"] . "<br> Omaniku aadress: " . $row["Adress"]; 
+				}?>
+				</p>
+			</div>
+		</div>
+	</div>
 </div>
-<h2>Millisel ajavahemikul soovid rentida kasutajale <?php echo $_SESSION['fname'] . " " . $_SESSION['lname'];?> kuuluvat haagist <?php echo $_SESSION['trailername'];?> ?</h2>
-<form method = "post">
-	Algusaeg:<input type = "date" name = "start">
-	Lõppaeg:<input type = "date" name = "end">
-	<input type = "submit" name = "smbbtn" value = "Kinnita">
-</form>
-<button id="myBtn">Vaata kasutaja täpsemaid andmeid</button>
-<div id="myModal" class="modal">
-	<div class="modal-content">
-    <span class="close">&times;</span>
-    <p><?php 
-	require "../../config.php";
-	$database = "if17_lahtsten";
-	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-	$eMail = $_SESSION['meil'];
-	$query = "SELECT FirstName, LastName, Email, Adress FROM trailerusers WHERE Email = '$eMail'";
-	$result = $mysqli->query($query);
-	$row = $result->fetch_assoc();
-	$result_rows = $result->num_rows;
-	if($result_rows > 0){
-		echo "Haagise omanik: " . $row["FirstName"] . " " . $row["LastName"] . "<br> Omaniku e-mail: " . $row["Email"] . "<br> Omaniku aadress: " . $row["Adress"]; 
-	}
-	
-	
-	?>
-	
-	</p>
-  </div>
 
-</div>
 <script>
 // Get the modal
 var modal = document.getElementById('myModal');

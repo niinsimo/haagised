@@ -1,3 +1,23 @@
+<link rel="stylesheet" href="croppie.css" />
+<script src="croppie.js"></script>
+<script src="cropimage.js"></script>
+<script>
+  function loadFile(event) {
+	var output = document.getElementById('output');
+	output.src = URL.createObjectURL(event.target.files[0]);
+	/*
+	var basic = document.getElementById('demo-basic').croppie ( {
+			viewport: {
+				width: 150,
+				height: 150
+			}
+		});
+		basic.croppie('bind', {
+			url: output.src,
+		  });
+	});*/
+}
+</script>
 <?php
 $target_dir = "profilepics/";
 $uploadOk = 1;
@@ -81,15 +101,10 @@ $row = $result2->fetch_assoc();
 $result_rows2 = $result2->num_rows;
 $vastus = $row['AVG(rating)'];
 if (is_null($vastus)) {
-	
 	$vastus = "-";
 }else{
-	
 	$vastus = $row['AVG(rating)'];
 }
-	
-	
-
 
 ?>
 
@@ -160,12 +175,10 @@ if (is_null($vastus)) {
 				}
 			}
 			
-				
 			if(file_exists("$folder")){
 				chmod($folder, 0777);
 				echo "<img class='profile-pic resize' src =" . $_SESSION['file'] . "><br>";
 			}
-			
 			
 			?>
 			<h1 class="username"><?php echo $_SESSION['username'];?></h1>
@@ -195,8 +208,13 @@ if (is_null($vastus)) {
 					</div><br>
 					
 					<div class="upload-btn-wrapper">
-						<button class="btn">Vali pilt</button>
-						<input type="file" name="fileToUpload"id="fileToUpload"/>
+						<button  class="btn">Vali pilt</button>
+						<input type="file" accept="profilepics/*" name="fileToUpload" id="fileToUpload" onchange="loadFile(event)" />			
+						<img id="output" />
+						<div id="page">
+							<div id="demo-basic">
+							</div>
+						</div>
 					</div><br>
 					<input type="submit" value="Lae haagis üles" name="submit">
 				</form>
