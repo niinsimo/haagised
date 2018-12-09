@@ -7,7 +7,7 @@ session_start();
 if(!isset($_SESSION['username'])){
 	header('Location: frontpage.php');
 }
-require "../../../config.php";
+require "../../config.php";
 if(isset($_POST["submit"])){
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -175,7 +175,6 @@ if (is_null($vastus)) {
 					</div><br>
 					<input type="submit" value="Uuenda profiilipilti" name="submitbtn"><br>
 				</form>
-				<button id = "myBtn">Minu andmed</button>
 				<form method="post" enctype="multipart/form-data">
 					<input name = "logout" type = "submit" value = "Logi välja">
 				</form>
