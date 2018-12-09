@@ -23,7 +23,7 @@ if(isset($_POST["loginButton"])){
 			$_SESSION['email'] = $email;
 			$_SESSION['id'] = $id;
 			$_SESSION['lastname'] = $lastname;
-			header("Location: avaleht.php");
+			header("Location: main.php");
 			exit();
 		}
 		else{
@@ -53,6 +53,7 @@ if(isset($_POST["loginButton"])){
 		<input type="text" name="loginEmail" placeholder= "Email" type="email"><br>
 		<input name="loginPassword" placeholder="Salasõna" type="password"><span></span><br>
 		<input class="submitButton" name="loginButton" type="submit" value="Logi sisse">
+		<p>Või <a href="register.php" >registreeru</a></p>
 		<p class = "error"><?php echo $error ?>
 	</form>
 	

@@ -29,8 +29,8 @@ for($x = 0; $x<$result_rows; $x++){
 	if($result_rows>0){
 		$row = $result->fetch_assoc();
 		$_SESSION['trname'] = $row['trailername'];
-		echo "<img src= " . $row['trailerpic'] . "><br>";
-		echo "<div class='addTrailerContainer'><div class = 'addTrailer'>Haagise nimi: " . $row['trailername'] . "<br><br><form method = 'post' enctype ='multipart/form-data' ><input type = 'text' name = 'chname" .$loendur ."' placeholder = 'Muuda nime'><div class = 'upload-btn-wrapper'><input type= 'submit' name ='submitname" . $loendur ."' value = 'Muuda'></div></form><br>Haagise kirjeldus: " . $row['trailerdesc'] . "<br><br><form method = 'post' enctype = 'multipart/form-data'><textarea name= 'chdesc" . $loendur ."' placeholder = 'Muuda kirjeldust' rows = '5' cols = '40'>" . $row['trailerdesc'] . "</textarea><div class = 'upload-btn-wrapper'><input type = 'submit' name = 'submitdesc" . $loendur ."' value = 'Muuda'></form></div></div></div>";
+		echo "<img class='trailerpic resize' src= " . $row['trailerpic'] . "><br>";
+		echo "<div class='addTrailerContainer'><div class = 'addTrailer'>Haagise nimi: " . $row['trailername'] . "<br><br><form method = 'post' enctype ='multipart/form-data' ><input type = 'text' name = 'chname" .$loendur ."' placeholder = 'Muuda nime'><br><div class = 'upload-btn-wrapper' style='contents;'><input type= 'submit' name ='submitname' style='width: 100px;'"  . $loendur ."' value = 'Muuda'></div></form><br>Haagise kirjeldus: " . $row['trailerdesc'] . "<br><br><form method = 'post' enctype = 'multipart/form-data'><textarea name= 'chdesc" . $loendur ."' placeholder = 'Muuda kirjeldust' rows = '5' cols = '40'>" . $row['trailerdesc'] . "</textarea><div class = 'upload-btn-wrapper' style='display: contents;'><input type = 'submit' name = 'submitdesc" . $loendur ."' value = 'Muuda'></form></div></div></div>";
 		$email = $_SESSION['email'];
 		$newsbmname = "submitname" . $loendur;
 		$newsbmdesc = "submitdesc" .$loendur;

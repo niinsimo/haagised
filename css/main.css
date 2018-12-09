@@ -9,8 +9,8 @@
 	text-align:center;
 	background-color: white; /* For browsers that do not support gradients */
     background-image: linear-gradient(to bottom right, #81F7D8, #BCA9F5);
-	height: 100%;
-	padding-top: 100px;
+	
+	padding-top: 2%;
 }
 
 .mainlogo{
@@ -88,6 +88,34 @@ nav ul li{
 
 nav ul li:last-child{
 	padding-right:0px;
+}
+
+.mainPageContainer{
+	padding: 30px;
+	text-align: center;
+	background-color: white; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to bottom right, #81F7D8, #BCA9F5); /* Standard syntax (must be last) */
+}
+
+.mainPageContainer a{
+	padding-left: 30px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 300px; 
+	font-size: 26px;
+	color: #2E2E2E;
+}
+
+.mainChoice{
+	padding: 0 30px;
+	display: inline-block;
+	border-radius: 10px;
+	width: 300px;
+	height: 300px;
+	background-color: rgb(255, 255, 255, 0.5);
+	-webkit-box-shadow: -6px 10px 58px -13px rgba(61,61,61,0.8);
+	-moz-box-shadow: -6px 10px 58px -13px rgba(61,61,61,0.8);
+	box-shadow: -6px 10px 58px -13px rgba(61,61,61,0.8);
 }
 
 nav ul li a{
@@ -353,12 +381,16 @@ footer{
 	padding-bottom: 40px;
 	padding-top: 20px;
 }
-	
+
+.prices {
+	display: inline;
+}
+
 
 .addTrailer {
 	text-align: center;
 	width: 700px;
-	height: 400px;
+	height: auto;
 	background-color: rgb(255, 255, 255, 0.4);
 	position: relative;
     left: 50%;
@@ -393,6 +425,13 @@ footer{
 	padding-top: 10px;
 }
 
+.addTrailer h3{
+	color: #404040;
+	font-weight: lighter;
+	padding-bottom: 8px;
+	padding-top: 8px;
+}
+
 .addTrailer label {
   font-weight: 400;
   text-transform: uppercase;
@@ -415,11 +454,11 @@ footer{
 
 
 .frontPageContainer {
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .frontPageContainer input {
-	width: 250px;
+	width: 60%;
 	height: 35px;
 	padding-left: 15px;
 	border: none;
@@ -443,7 +482,7 @@ footer{
 }
 
 .addTrailer input[type=submit]{
-	width: 200px;
+	width: 60%;
 	height: 35px;
 	padding-left: 15px;
 	border: none;
@@ -532,6 +571,12 @@ footer{
     width:70px;
     height: 70px;
 	border-radius: 50%;
+}
+
+.trailerpic.resize{
+	object-fit: cover;
+    width:200px;
+    height: 200px;
 }
 
 .upload-btn-wrapper {

@@ -28,15 +28,41 @@ if(isset($_POST["submit"])){
 	$database = "if17_lahtsten";
 	$trailerName = $_POST['trailerName'];
 	$trailerDesc = $_POST['comment'];
+	$onehour = $_POST['onehour'];
+	$twelvehours = $_POST['twelvehours'];
+	$oneday = $_POST['oneday'];
+	$oneweek = $_POST['oneweek'];
+	$onemonth = $_POST['onemonth'];
+	
 	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 	$query = $mysqli->prepare ("INSERT INTO trailerinfo(trailername, trailerpic, trailerdesc, Email) VALUES (?,?,?,?)");
 	echo $mysqli->error;
 	$query->bind_param("ssss", $trailerName, $target_file, $trailerDesc, $_SESSION['email']);
 	if($query->execute()){
-		header('Location: upload.php');
-	}else{
+	
+	}
+	else{
 		echo "Tekkis viga!" . $query->error;
 	}
+	
+		$email = $_SESSION['email'];
+		$query = "SELECT trailerId FROM trailerinfo WHERE Email = '$email' ORDER BY trailerId DESC LIMIT 1";
+		$result = $mysqli->query($query);
+		$row = $result->fetch_assoc();
+		$result_trailerId = $row['trailerId'];
+		echo $result_trailerId;
+
+		$query = $mysqli->prepare ("INSERT INTO trailerprices(onehour, twelvehours, oneday, oneweek, onemonth, trailerId) VALUES (?,?,?,?,?,?)");
+			echo $mysqli->error;
+			$query->bind_param("iiiiii", $onehour, $twelvehours, $oneday, $oneweek, $onemonth, $result_trailerId);
+			if($query->execute()){
+				echo "jee";
+				header('Location: upload.php');
+			}else{
+				echo "Tekkis viga!" . $query->error;
+			}
+		
+	
 }
 if(isset($_POST["logout"])){
 	session_unset();
@@ -56,7 +82,7 @@ $result_rows2 = $result2->num_rows;
 $vastus = $row['AVG(rating)'];
 if (is_null($vastus)) {
 	
-	$vastus = " Teile pole veel hinnangut antud!";
+	$vastus = "-";
 }else{
 	
 	$vastus = $row['AVG(rating)'];
@@ -159,6 +185,15 @@ if (is_null($vastus)) {
 					<br>
 					<textarea name= "comment" rows = "5" cols = "40" placeholder = "Tehnilised spetsifikatsioonid" ></textarea>
 					<br>
+					<div class="prices" >
+						<h3>Hinnakiri: </h3>
+						<input style="width: 100px;" type = "text" placeholder = "1h" name = "onehour">
+						<input style="width: 100px;" type = "text" placeholder = "12h" name = "twelvehours">
+						<input style="width: 100px;" type = "text" placeholder = "1 päev" name = "oneday">
+						<input style="width: 100px;" type = "text" placeholder = "1 nädal" name = "oneweek">
+						<input style="width: 100px;" type = "text" placeholder = "1 kuu" name = "onemonth">
+					</div><br>
+					
 					<div class="upload-btn-wrapper">
 						<button class="btn">Vali pilt</button>
 						<input type="file" name="fileToUpload"id="fileToUpload"/>

@@ -1,5 +1,5 @@
 <?php
-require "../../../config.php";
+require "../../config.php";
 $database ="if17_lahtsten";
 $hash = "";
 $notice = "";
@@ -77,33 +77,29 @@ if(isset($_POST["registerButton"])){
 <style>
 <?php include 'css/main.css'; ?>
 </style>
-<form method="POST">
 </head>
 <body>
-
-		<label>Eesnimi </label>
-		<input name="signupFirstName" type="text"><?php echo $firstnameError; ?> 
+<div class= "frontPageContainer">
+	<img class="mainlogo" src="css/pics/haagiserent-suur.png">
+	
+	<form class="login" method="POST">
+		<input placeholder="Eesnimi" name="signupFirstName" type="text"><?php echo $firstnameError; ?> 
 		<span></span>
 		<br>
-		<label>Perekonnanimi </label>
-		<input name="signupFamilyName" type="text"><?php echo $lastnameError; ?> 
+		<input placeholder="Perekonnanimi" name="signupFamilyName" type="text"><?php echo $lastnameError; ?> 
 		<span></span>
 		<br>
-		<label>Email </label>
-		<input name="signupEmail" type="text"><?php echo $emailError; ?> 
+		<input placeholder="Email" name="signupEmail" type="text"><?php echo $emailError; ?> 
 		<br>
-		<label>Parool </label>
-		<input name="passwd" type="password"><?php echo $passwdError; ?> 
+		<input placeholder="Parool" name="passwd" type="password"><?php echo $passwdError; ?> 
 		<br>
-		<label>Parool uuesti </label>
-		<input name="passwdagain" type="password"> 
+		<input placeholder="Kinnita parool" name="passwdagain" type="password"> 
 		<br>
-		<label>Aadress</label>
-		<input name = "adress" type ="text"><?php echo $adressError; ?>
+		<input placeholder="Aadress" name = "adress" type ="text"><?php echo $adressError; ?>
 		<br>
 		<input name="registerButton" type ="submit" value="Loo kasutaja">
-		
-		
-</form>
+		<p>Või <a href="frontpage.php" >logi sisse</a></p>
+	</form>
+</div>
 </body>
 </html>
