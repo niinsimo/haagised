@@ -65,7 +65,7 @@ if(isset($_POST['submit'])){
 			Lõppaeg:<input type = "date" name = "end">
 			<input type = "submit" name = "smbbtn" value = "Kinnita">
 		</form>
-		<button id="myBtn">Vaata kasutaja täpsemaid andmeid</button>
+		<button id="my2Btn">Vaata kasutaja täpsemaid andmeid</button>
 		<div id="myModal" class="modal">
 			<div class="modal-content">
 				<span class="close">&times;</span>
@@ -93,7 +93,7 @@ if(isset($_POST['submit'])){
 var modal = document.getElementById('myModal');
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var btn = document.getElementById("my2Btn");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];

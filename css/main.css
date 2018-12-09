@@ -514,6 +514,26 @@ footer{
 	cursor:pointer;
 }
 
+.addTrailer button[id=my2Btn]{
+	width: 200px;
+	height: 35px;
+	padding-left: 15px;
+	border: none;
+	border-radius: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: white;
+	background-color: #48c2ff;
+	text-transform: uppercase;
+	font-size: 16px;
+	font-weight: lighter;
+	opacity: 0.8;
+}
+#my2Btn{
+	cursor:pointer;
+}
+
+
 .addTrailer textarea{
 	width: 80%;
 	height: 70px;
