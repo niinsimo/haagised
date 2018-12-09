@@ -7,7 +7,7 @@ session_start();
 if(!isset($_SESSION['username'])){
 	header('Location: frontpage.php');
 }
-require "../../config.php";
+require "../../../config.php";
 if(isset($_POST["submit"])){
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -167,14 +167,15 @@ if (is_null($vastus)) {
 				</form>
 			</div>
 			<div class="addTrailer">
-				<a href = "mydata.php"><h2>Minu andmed</h2></a>
 				<form method = "post" enctype="multipart/form-data">
 					<div class="upload-btn-wrapper">
+					<br>
 						<button class="btn">Vali pilt</button>
 						<input type="file" name="fileToUpload2" id="fileToUpload2"><br>
 					</div><br>
 					<input type="submit" value="Uuenda profiilipilti" name="submitbtn"><br>
 				</form>
+				<button id = "myBtn">Minu andmed</button>
 				<form method="post" enctype="multipart/form-data">
 					<input name = "logout" type = "submit" value = "Logi välja">
 				</form>
@@ -182,4 +183,63 @@ if (is_null($vastus)) {
 		</div>
 		<?php include("footer.php"); ?>
 	</div>
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+		<span class="close">&times;</span>
+		<p><?php 
+		require "../../config.php";
+		$database = "if17_lahtsten";
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+		$query = "SELECT FirstName, LastName, Adress FROM trailerusers WHERE Email = '" . $_SESSION['email'] . "' ";
+		$result = $mysqli->query($query);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				echo "Eesnimi: ". $row["FirstName"] . "</br>"; 
+				echo "Perenimi: ". $row["LastName"]. "</br>";
+				echo "Aadress: " . $row["Adress"] . "<form method = 'post'><input name = 'changeAdress' type='text' placeholder = 'Muuda aadressi'><input name = 'changeButton' type='submit' value = 'Muuda'></form> <br>";
+			}
+		} else {
+			echo "Midagi läks valesti!";
+		}
+		if(isset($_POST['changeButton'])){
+			$adress = $_POST['changeAdress'];
+			$query = "UPDATE trailerusers SET Adress ='$adress' WHERE Email = '" . $_SESSION['email'] . "' ";
+			$result = $mysqli->query($query);
+			header('Location: '.$_SERVER['PHP_SELF']);
+		}
+		
+		
+		?>
+		
+		</p>
+	  </div>
+
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 

@@ -12,7 +12,7 @@ ob_start();
 			<li><a href="avaleht.php">Avaleht</a></li>
 			<li><a href="upload.php">Haagised</a></li>
 			<li><a href="mytrailers.php">Minu haagised</a></li>
-			<li><a href="mydata.php">Minu andmed</a></li>
+			<li><a id = "myBtn">Minu andmed</a></li>
 			<li><a href="frontpage.php">Logi välja</a></li>
 		</ul>
 	</nav>

@@ -335,6 +335,10 @@ footer{
     text-decoration: none;
 }
 
+.error{
+	color:red;
+}
+
 .addTrailerContainer{
 	background-color: rgb(227, 227, 227);
 	width: 100%;
@@ -452,6 +456,24 @@ footer{
 	font-size: 16px;
 	font-weight: lighter;
 	opacity: 0.8;
+}
+.addTrailer button[id=myBtn]{
+	width: 200px;
+	height: 35px;
+	padding-left: 15px;
+	border: none;
+	border-radius: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: white;
+	background-color: #48c2ff;
+	text-transform: uppercase;
+	font-size: 16px;
+	font-weight: lighter;
+	opacity: 0.8;
+}
+#myBtn{
+	cursor:pointer;
 }
 
 .addTrailer textarea{
