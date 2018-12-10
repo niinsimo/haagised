@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <style>
@@ -9,13 +10,13 @@
 </style>
 <?php session_start(); include("header.php"); ?>
 <div class = "search">
-	<form method = "post" enctype = "multipart/form-data">
+	<form class="search" method = "post" enctype = "multipart/form-data">
 		<select name="values">
 			<option value="haagis">Haagise nimi</option>
 			<option value="omanik">Omaniku nimi</option>
 		</select>
 		<input type = "text" name = "otsing">
-		<input type = "submit" value = "Otsi" name ="search">
+		<input class="upload-btn-wrapper" type = "submit" name ="search" value="Otsi">
 		
 		
 	</form>
@@ -62,7 +63,7 @@
 			<p><?php 
 			require "../../config.php";
 			$database = "if17_lahtsten";
-			$trailer = $_SESSION['trailer'];
+			//$trailer = $_SESSION['trailer'];
 			$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 			$query = "SELECT onehour, twelvehours, oneday, oneweek, onemonth FROM trailerprices INNER JOIN trailerinfo ON trailerprices.trailerId = trailerinfo.trailerId WHERE trailerinfo.trailername = 'jfe'";
 			$result = $mysqli->query($query);
@@ -84,7 +85,7 @@
 </html>
 
 <?php
-require "../../../config.php";
+require "../../config.php";
 if(!isset($_SESSION['username'])){
 	header('Location: frontpage.php');
 }

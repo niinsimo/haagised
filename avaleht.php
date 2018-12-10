@@ -1,6 +1,4 @@
-<link rel="stylesheet" href="croppie.css" />
-<script src="croppie.js"></script>
-<script src="cropimage.js"></script>
+
 <script>
   function loadFile(event) {
 	var output = document.getElementById('output');
@@ -209,7 +207,7 @@ if (is_null($vastus)) {
 					
 					<div class="upload-btn-wrapper">
 						<button  class="btn">Vali pilt</button>
-						<input type="file" accept="profilepics/*" name="fileToUpload" id="fileToUpload" onchange="loadFile(event)" />			
+						<input type="file" name="fileToUpload" id="fileToUpload" onchange="loadFile(event)" />			
 						<img id="output" />
 						<div id="page">
 							<div id="demo-basic">
@@ -221,7 +219,7 @@ if (is_null($vastus)) {
 			</div>
 			<div class="addTrailer">
 				<form method = "post" enctype="multipart/form-data">
-					<div class="upload-btn-wrapper">
+					<div class="btn">
 					<br>
 						<button class="btn">Vali pilt</button>
 						<input type="file" name="fileToUpload2" id="fileToUpload2"><br>

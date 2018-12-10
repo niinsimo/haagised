@@ -465,7 +465,7 @@ footer{
 
 
 .frontPageContainer {
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 
 .frontPageContainer input {
@@ -623,6 +623,28 @@ footer{
   border-radius: 8px;
   font-size: 16px;
   font-weight: bold;
+}
+
+.search option{
+	margin-top: 2px;
+	width: 100px;
+	height: 25px;
+	padding-left: 15px;
+	border: 1px solid gray;
+	border-radius: 20px;
+	margin-bottom: 20px;
+	background-color: r404040;
+}
+
+.search input[type=text]{
+	margin-top: 2px;
+	width: 100px;
+	height: 25px;
+	padding-left: 15px;
+	border: 1px solid gray;
+	border-radius: 20px;
+	margin-bottom: 20px;
+	background-color: r404040;
 }
 
 .upload-btn-wrapper input[type=file] {
